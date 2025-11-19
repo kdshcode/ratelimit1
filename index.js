@@ -1,1 +1,1 @@
-console.log("this is the data i wanna se in my git")
+console.log("this is the data  'adding this to new commit to see'i wanna se in my git")
