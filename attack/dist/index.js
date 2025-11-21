@@ -29,32 +29,44 @@ function sendRequest(otp) {
             },
             data: data
         };
-        try {
-            yield axios_1.default.request(config);
-        }
-        catch (e) {
-        }
+        // try {
+        yield axios_1.default.request(config)
+            // } catch(e){
+            // }
+            .then((response) => {
+            console.log(JSON.stringify(response.data));
+        })
+            .catch((error) => {
+            console.log(error);
+        });
     });
 }
-// .then((response) => {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
 // sendRequest("279415");
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        for (let i = 0; i <= 999999; i += 100) {
-            console.log("hello");
-            const arr = [];
-            console.log(i);
-            for (let j = 0; j < 100; j++) {
-                arr.push(sendRequest((i + j).toString()));
-            }
-            // console.log(arr)
-            yield Promise.all(arr);
-        }
-    });
+// async function main (){
+//     for ( let i=0; i<=999999; i+=100){
+//      console.log("hello")
+//     const arr = [];
+//     console.log(i);
+//     for ( let j=0 ; j<100; j++){
+//         arr.push(sendRequest((i+j).toString()));   
+//     }
+//     // console.log(arr)
+//     await Promise.all(arr);
+// }}
+// async function main (){
+//     for ( let i=0; i<=999999; i+=100){
+//      console.log("hello")
+//     const arr = [];
+//     console.log(i);
+//     for ( let j=0 ; j<100; j++){
+//         arr.push(sendRequest((i+j).toString()));   
+//     }
+//     // console.log(arr)
+//     await Promise.all(arr);
+// }}
+// main();
+// main();
+for (let i = 0; i <= 999999; i++) {
+    console.log(i);
+    sendRequest(i.toString());
 }
-main();

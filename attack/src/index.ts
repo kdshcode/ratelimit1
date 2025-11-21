@@ -22,34 +22,52 @@ import axios from 'axios';
         data : data
     };
 
-    try {
+    // try {
         await axios.request(config)
-    } catch(e){
+    // } catch(e){
 
-    }
-}
-// .then((response) => {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
+    // }
+
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+ }
 
 
 
 
 // sendRequest("279415");
 
-async function main (){
-    for ( let i=0; i<=999999; i+=100){
-     console.log("hello")
-    const arr = [];
-    console.log(i);
-    for ( let j=0 ; j<100; j++){
-        arr.push(sendRequest((i+j).toString()));   
-    }
-    // console.log(arr)
-    await Promise.all(arr);
-}}
+// async function main (){
+//     for ( let i=0; i<=999999; i+=100){
+//      console.log("hello")
+//     const arr = [];
+//     console.log(i);
+//     for ( let j=0 ; j<100; j++){
+//         arr.push(sendRequest((i+j).toString()));   
+//     }
+//     // console.log(arr)
+//     await Promise.all(arr);
+// }}
+// async function main (){
+    //     for ( let i=0; i<=999999; i+=100){
+    //      console.log("hello")
+    //     const arr = [];
+    //     console.log(i);
+    //     for ( let j=0 ; j<100; j++){
+    //         arr.push(sendRequest((i+j).toString()));   
+    //     }
+    //     // console.log(arr)
+    //     await Promise.all(arr);
+    // }}
+    
+    // main();
+// main();
 
-main();
+for (let i=0; i<=999999; i++){
+    console.log(i)
+    sendRequest(i.toString())
+}

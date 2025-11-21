@@ -1,12 +1,30 @@
 import expres from 'express'
+import ratelimit from "express-rate-limit"
 
  const app = expres ();
 
 app.use(expres.json());
 
+const otpLimiter = ratelimit ({
+    windowMs : 5*60*1000,
+    max: 7,
+    message : " too many request in jsut 5 min ",
+    standardHeaders: true,
+    legacyHeaders: false
+})
+
+const resetPasswordlimiter = ratelimit({
+    windowMs: 3 * 60 * 1000, // 15 minutes
+	limit: 2, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-8', // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+	// ipv6Subnet: 56,
+    message : "too many req in given window"
+})
+
 const otpStore :Record<string, string> = {}
 
-app.post ( "/generate-otp", (req, res )=>{
+app.post ( "/generate-otp",otpLimiter, (req, res )=>{
     const email = req.body.email;
 
     if (!email){
@@ -22,7 +40,7 @@ app.post ( "/generate-otp", (req, res )=>{
 })
 
 
-app.post ( '/reset-password', ( req, res)=>{
+app.post ( '/reset-password', resetPasswordlimiter, ( req, res)=>{
     const { email, otp, newPassword }= req.body;
     if(!email || !otp || !newPassword ){
         return res.status(400).json ({message : "Email, otp, new Password are required "})
